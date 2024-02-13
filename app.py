@@ -1,11 +1,13 @@
 from flask import Flask, request, jsonify, redirect, url_for, session, render_template
 from flask_cors import CORS
 from views import auth_views
+from views import review_views
 from models.auth import login_required
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 app.register_blueprint(auth_views, url_prefix='/auth')
+app.register_blueprint(review_views, url_prefix='/review')
 cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 # Custom error handler for 403 Forbidden

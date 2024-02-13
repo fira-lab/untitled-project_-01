@@ -15,11 +15,13 @@ def add_review():
         review (dict): review details
     """
     review = request.get_json()
+    print(review)
     if not review:
         return make_response(jsonify({ 'error': 'invalid request' }), 400)
-    if 'review' not in review:
+    if 'feedback' not in review:
         return make_response(jsonify({ 'error': 'invalid request' }), 400)
-    review['sentiment'] = sentimentAnalysis.analyse(review['review'])[0]['label']
+    review['sentiment'] = sentimentAnalysis.analyse(review['feedback'])[0]['label']
+    print(review)
     result = storage.add_review(review)
     if result:
         return make_response(jsonify({ 'message': 'review added' }), 201)

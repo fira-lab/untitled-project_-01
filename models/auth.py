@@ -8,7 +8,7 @@ def login_required(func):
     def wrapper(*args, **kwargs):
         session_id = request.cookies.get('session_id')
         if session_id not in session:
-            return redirect(url_for('root'))
+            return abort(403)
         return func(*args, **kwargs)
     return wrapper
 
