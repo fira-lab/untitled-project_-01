@@ -111,3 +111,16 @@ class Storage:
     def add_review(self, review: Dict[str, Any]) -> bool:
         result = self.__reviewCollection.insert_one(review)
         return result.acknowledged
+
+    def get_all_reviews(self) -> List[Dict[str, Any]]:
+    """
+    return all reviews
+
+    return:
+        reviews (list): list of all reviews
+    """
+    try:
+        reviews = list(self.__reviewCollection.find())
+    except Exception:
+        return
+    return reviews
